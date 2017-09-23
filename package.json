@@ -1,0 +1,16 @@
+{
+  "name": "filesdownload",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "path": "^0.12.7",
+    "request": "^2.82.0",
+    "request-progress": "^3.0.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "malekbenz",
+  "license": "ISC"
+}
