@@ -1,7 +1,7 @@
 var request = require('request'),
     progress = require('request-progress'),
     colors = require('colors')
-    fs = require('fs');
+fs = require('fs');
 
 
 var numberPattern = /\d+$/g;
@@ -43,11 +43,11 @@ function download(url, filePath, callback) {
         })
         .on('progress', function (state) {
             console.reset();
-            console.log('File Name: '.green, url);
-            console.log('percent : '.yellow, Math.floor(state.percent * 100) + " %");
-            console.log('speed : ', Math.floor(state.speed / 1000) + " kb");
-            console.log('Total size :', numberWithCommas(Math.floor(state.size.total / 1000)) + ' kb' );
-            console.log('transferred :', numberWithCommas(Math.floor(state.size.transferred / 1000)) + ' kb');
+            console.log('File Name      : '.green, url.yellow);
+            console.log('percent        : '.yellow, Math.floor(state.percent * 100) + " %");
+            console.log('speed          : '.yellow, Math.floor(state.speed / 1000) + " kb");
+            console.log('Total size     : '.yellow, numberWithCommas(Math.floor(state.size.total / 1000)).green + ' kb');
+            console.log('transferred    : '.yellow, numberWithCommas(Math.floor(state.size.transferred / 1000)).green + ' kb');
 
             // console.log('time', state.time.elapsed);
             // console.log('Rest ', state.time.remaining);
