@@ -5,6 +5,10 @@ var request = require('request'),
 
 var numberPattern = /\d+$/g;
 
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function pad(number, length) {
 
     var my_string = '' + number;
@@ -41,8 +45,8 @@ function download(url, filePath, callback) {
             console.log('File Name: ', url);
             console.log('percent : ', Math.floor(state.percent * 100) + " %");
             console.log('speed : ', Math.floor(state.speed / 1000) + " kb");
-            // console.log('Total size ', state.size.total);
-            // console.log('transferred ', state.size.transferred);
+            console.log('Total size :', numberWithCommas(Math.floor(state.size.total / 1000)) + ' kb' );
+            console.log('transferred :', numberWithCommas(Math.floor(state.size.transferred / 1000)) + ' kb');
 
             // console.log('time', state.time.elapsed);
             // console.log('Rest ', state.time.remaining);
