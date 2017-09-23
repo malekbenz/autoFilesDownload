@@ -28,10 +28,10 @@ console.reset = function () {
 
 function getNext(name) {
     var number = name.match(numberPattern)[0];
+
     var length = number.length;
-    return pad(++number, length);
-
-
+    name = name.substring(0, name.length - length);
+    return name + pad(++number, length);
 }
 
 function download(url, filePath, callback) {
