@@ -1,5 +1,6 @@
 var request = require('request'),
     progress = require('request-progress'),
+    colors = require('colors')
     fs = require('fs');
 
 
@@ -42,7 +43,7 @@ function download(url, filePath, callback) {
         })
         .on('progress', function (state) {
             console.reset();
-            console.log('File Name: ', url);
+            console.log('File Name: '.green, url);
             console.log('percent : ', Math.floor(state.percent * 100) + " %");
             console.log('speed : ', Math.floor(state.speed / 1000) + " kb");
             console.log('Total size :', numberWithCommas(Math.floor(state.size.total / 1000)) + ' kb' );
