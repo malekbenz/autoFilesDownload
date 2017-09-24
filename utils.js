@@ -1,10 +1,19 @@
 var request = require('request'),
     progress = require('request-progress'),
-    colors = require('colors')
-fs = require('fs');
+    colors = require('colors'),
+    URL = require('url'),
+    fs = require('fs');
 
 
 var numberPattern = /\d+$/g;
+
+function dirnameFromUrl(url) {
+
+    const parsedURL = URL.parse(url);
+    return parsedURL.pathname.split('/')[1];
+
+}
+
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -37,10 +46,10 @@ function getNext(name) {
 function download(url, filePath, callback) {
 
     return progress(request(url), {
-            throttle: 2000, // Throttle the progress event to 2000ms, defaults to 1000ms
-            delay: 1000 // Only start to emit after 1000ms delay, defaults to 0ms
-            // lengthHeader: 'x-transfer-length'  // Length header to use, defaults to content-length
-        })
+        throttle: 2000, // Throttle the progress event to 2000ms, defaults to 1000ms
+        delay: 1000 // Only start to emit after 1000ms delay, defaults to 0ms
+        // lengthHeader: 'x-transfer-length'  // Length header to use, defaults to content-length
+    })
         .on('progress', function (state) {
             console.reset();
             console.log('File Name      : '.green, url.yellow);
@@ -65,5 +74,6 @@ function download(url, filePath, callback) {
 
 module.exports = {
     getNext: getNext,
+    dirnameFromUrl: dirnameFromUrl,
     download: download
 }
