@@ -3,8 +3,8 @@ var path = require("path"),
     utils = require('./utils');
 
 
-var distPath = process.argv[3] || __dirname;
 var url = process.argv[2] || 'https://vs1.someurl/015.mp4';
+var distPath = process.argv[3] || __dirname;
 
 
 function extractPath(url, next) {
