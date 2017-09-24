@@ -8,7 +8,6 @@ var distPath = process.argv[3] || __dirname;
 
 if (distPath == __dirname) {
     distPath = path.join(distPath, utils.dirnameFromUrl(url));
-
     
 }
 
