@@ -6,6 +6,16 @@ var path = require("path"),
 var url = process.argv[2] || 'https://vs1.someurl/015.mp4';
 var distPath = process.argv[3] || __dirname;
 
+if (distPath == __dirname) {
+    distPath = path.join(distPath, utils.dirnameFromUrl(url));
+
+    if (!fs.existsSync(distPath)) {
+        fs.mkdirSync(distPath);
+    }
+
+}
+
+
 
 function extractPath(url, next) {
 
