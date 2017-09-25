@@ -52,7 +52,8 @@ function download(url, filePath, callback) {
     })
         .on('progress', function (state) {
             console.reset();
-            console.log('File Name      : '.green, url.yellow);
+            console.log('Dowload from   : '.green, url.yellow);
+            console.log('Dowload to     : '.green, filePath.yellow);
             console.log('percent        : '.yellow, Math.floor(state.percent * 100) + " %");
             console.log('speed          : '.yellow, Math.floor(state.speed / 1000) + " kb");
             console.log('Total size     : '.yellow, numberWithCommas(Math.floor(state.size.total / 1000)).green + ' kb');
