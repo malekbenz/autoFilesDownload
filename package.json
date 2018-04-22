@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "colors": "^1.1.2",
+    "command-line-args": "^5.0.2",
     "path": "^0.12.7",
     "request": "^2.82.0",
     "request-progress": "^3.0.0",
