@@ -10,6 +10,7 @@ const optionDefinitions = [
     { name: 'autoname', type: Boolean },
     { name: 'day', type: Boolean },
     { name: 'week', type: Boolean },
+    { name: 'weekname', type: Boolean },
 
     { name: 'all', type: Boolean },
 ];
@@ -18,13 +19,15 @@ const options = commandLineArgs(optionDefinitions)
 
 console.log('options', options);
 
+var jours = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+
 var url = options['src'] || 'https://vs1.someurl/015.mp4';
 var distPath = options['dest'] || __dirname;
 var all = options['all'] || false;
 
 var day = (new Date).getDate();
 var autoName = options['autoname'] || false;
-
+var weekName = options['weekname'] || false;
 
 if (options['day']) {
     day = (new Date).getDate();
@@ -32,7 +35,10 @@ if (options['day']) {
 if (options['week']) {
     day = (new Date).getDay() + 1;
 }
-
+if (options['weekname']) {
+    day = (new Date).getDay();
+    day = jours[day];
+}
 distPath = path.join(distPath, day.toString());
 
 
