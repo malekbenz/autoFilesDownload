@@ -5,12 +5,11 @@ var path = require("path"),
 const commandLineArgs = require('command-line-args');
 
 const optionDefinitions = [
-    { name: 'verbose', alias: 'v', type: Boolean },
-    { name: 'src', alias: 's', type: String },
+    { name: 'src', alias: 's', defaultOption: true, type: String },
     { name: 'dest', alias: 'd', type: String },
     { name: 'day', type: Boolean },
     { name: 'week', type: Boolean },
-    
+
     { name: 'all', type: Boolean },
 ];
 
@@ -24,10 +23,10 @@ var all = options['all'] || false;
 
 var day = (new Date).getDate();
 
-if(options['day']){
+if (options['day']) {
     day = (new Date).getDate();
 }
-if(options['week']){
+if (options['week']) {
     day = (new Date).getDay() + 1;
 }
 
