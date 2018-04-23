@@ -7,6 +7,7 @@ const commandLineArgs = require('command-line-args');
 const optionDefinitions = [
     { name: 'src', alias: 's', defaultOption: true, type: String },
     { name: 'dest', alias: 'd', type: String },
+    { name: 'autoname', type: Boolean },
     { name: 'day', type: Boolean },
     { name: 'week', type: Boolean },
 
@@ -22,6 +23,8 @@ var distPath = options['dest'] || __dirname;
 var all = options['all'] || false;
 
 var day = (new Date).getDate();
+var autoName = options['autoname'] || false;
+
 
 if (options['day']) {
     day = (new Date).getDate();
@@ -63,6 +66,12 @@ function extractPath(url, next) {
     }
     var url2 = url + '/' + fileName + ext;
     var filePath = path.join(distPath, fileName + ext);
+
+    if (autoName) { // replace with the file name with date 
+        fileName = (new Date()).toLocaleDateString();
+        filePath = path.join(distPath, fileName + ext);
+    }
+
     return {
         url: url2,
         filePath: filePath
