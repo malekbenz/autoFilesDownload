@@ -47,8 +47,9 @@ function download(url, filePath, callback) {
 
     return progress(request(url), {
         throttle: 2000, // Throttle the progress event to 2000ms, defaults to 1000ms
-        delay: 1000 // Only start to emit after 1000ms delay, defaults to 0ms
+        delay: 1000, // Only start to emit after 1000ms delay, defaults to 0ms
         // lengthHeader: 'x-transfer-length'  // Length header to use, defaults to content-length
+        gzip : true
     })
         .on('progress', function (state) {
             console.reset();
