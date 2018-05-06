@@ -1,18 +1,40 @@
-
 var path = require("path"),
     fs = require('fs'),
     utils = require('./utils');
 const commandLineArgs = require('command-line-args');
 
-const optionDefinitions = [
-    { name: 'src', alias: 's', defaultOption: true, type: String },
-    { name: 'dest', alias: 'd', type: String },
-    { name: 'autoname', type: Boolean },
-    { name: 'day', type: Boolean },
-    { name: 'week', type: Boolean },
-    { name: 'weekname', type: Boolean },
+const optionDefinitions = [{
+        name: 'src',
+        alias: 's',
+        defaultOption: true,
+        type: String
+    },
+    {
+        name: 'dest',
+        alias: 'd',
+        type: String
+    },
+    {
+        name: 'autoname',
+        type: Boolean
+    },
+    {
+        name: 'day',
+        type: Boolean
+    },
+    {
+        name: 'week',
+        type: Boolean
+    },
+    {
+        name: 'weekname',
+        type: Boolean
+    },
 
-    { name: 'all', type: Boolean },
+    {
+        name: 'all',
+        type: Boolean
+    },
 ];
 
 const options = commandLineArgs(optionDefinitions)
@@ -31,14 +53,15 @@ var weekName = options['weekname'] || false;
 
 if (options['day']) {
     day = (new Date).getDate();
-}
-if (options['week']) {
+} else if (options['week']) {
     day = (new Date).getDay() + 1;
-}
-if (options['weekname']) {
+} else if (options['weekname']) {
     day = (new Date).getDay();
     day = jours[day];
+} else {
+    day = '';
 }
+
 distPath = path.join(distPath, day.toString());
 
 
