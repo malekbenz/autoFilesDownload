@@ -1,3 +1,5 @@
-# To install
-### npm install
-### npm run start "https://your.website.net/rep/016.mp4" "E:\Training Videos\my Directory"
+# How to install
+`$ npm install`
+
+# How to run
+`$ node index -s SourceURL -d destinationDirectory --all`
