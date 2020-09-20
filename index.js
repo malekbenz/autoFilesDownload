@@ -2,6 +2,7 @@ var path = require("path"),
     fs = require('fs'),
     utils = require('./utils');
 const commandLineArgs = require('command-line-args');
+const cheerio = require("cheerio");
 
 const optionDefinitions = [{
         name: 'src',
@@ -78,6 +79,17 @@ if (!fs.existsSync(distPath)) {
 }
 
 
+
+function extractUrls(html){
+	const $ = cheerio.load(html );
+	const result = $("script[type='application/ld+json']");
+	var data = result[0].children[0].data;
+	data = JSON.parse(data);
+	const urls = data["@graph"].map(x=> ({url :x.url, name: x.name}))
+	console.log(urls);
+	return urls;
+}
+
 function extractPath(url, next) {
 
     var ext = path.extname(url);
@@ -108,6 +120,13 @@ function extractPath(url, next) {
 }
 
 currentFile = extractPath(url)
+
+fetch('https://coursehunter.net/course/go-dlya-javascript-razrabotchikov')
+	.then(x=> x.text())
+	.then((response)=> {
+		extractUrls(response);
+	})
+
 
 utils.download(currentFile.url, currentFile.filePath, fileDownload);
 
