@@ -1,12 +1,25 @@
-var numberPattern = /\d+$/g;
-
-var url =  process.argv[2] || 'bba3401';
-var dir =  process.argv[3] || __dirname;
+var request = require('request');
+const fetch = require('node-fetch');
+const cheerio = require("cheerio");
 console.log(__dirname)
 
-var result = url.match(numberPattern);
 
-result = result ? result[0]: "fateh" ;
-console.log(result);
+fetch('https://coursehunter.net/course/go-dlya-javascript-razrabotchikov')
+	.then(x=> x.text())
+	.then((response)=> {
+		extractUrls(response);
+	})
 
+
+
+function extractUrls(html){
+	const $ = cheerio.load(html );
+	const result = $("script[type='application/ld+json']");
+	var data = result[0].children[0].data;
+	data = JSON.parse(data);
+	//console.log(data);
+	const urls = data["@graph"].map(x=> ({url :x.url, name: x.name}))
+	console.log(urls);
+	return urls;
+}
 
